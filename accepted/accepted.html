@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter Animation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loader-overlay">
+        <div class="loader"></div>
+    </div>
+    <div class="container">
+        <p id="typewriter-text" class="hidden">
+            Hi Erika❤️💌💌. Gulat ka noh HAHAHA. Uunahan na kita magbigay ng love letter😜😝 So ginawa ko toh kase trip kolang and kasama ka sa trip ko HAHAHA🤣🤣. Bago ang lahat syempre magpapakilala muna ako…. So ako nga pala si Rhenz Daryl… Ang DAReaL na nagmamahal sau. HAHAHA FR FR.. Anyways warning mahaba habang confession yung babasahin mo kasi pag pa physical letter eh di to magkakasya kaya magdusa ka😁. Btw, Sana nagustuhan mo yung ginawa ko sayo. Ilang araw ko ginawa yan hahaha. Pero worth it naman kase gusto ko ren na kahit papano ay maging masaya yung first valentines ko na dati ay binabalewala kolang. Pero ngayon ay mararanasan ko na ng kasama ka. Di ko nga lang alam ano gagawin sa bukas . Pero bago muna ang lahat, happy FIRST VALENTINES ERIKA❤️🎉 . So, pumayag ka kaya ka nandito kaya dapat ako lang maging valentine mo hanggang tubuan kana ng uban ha. Seryoso yan😠😤. HAHAHA. 
+
+            Ambilis ng panahon noh, parang nung nakaraan, nagkakahiyaan pa tayo. Parang kahapon lang nag celebrate tayo ng first christmas and new year, di nga lang magkasama pero atleast, in heart ay nacelebrate natin❤️. Wish ko sana sa future ay magkasama na tayong kakain ng noche buena sa pasko at manonood ng fireworks display sa new year. Pero ngayon, macecelebrate natin ang first valentines ko ng kasama kita.😊😊
+            
+            So, usapang first, salamat sa lahat lahat ng first na pinaranas mo saken. Mula sa first date, first holding hands, first hug, and first kiss at sa marami pang first na gagawin natin😜.Lahat ng yon ay sobrang mahalaga sa akin at di ko yon makakalimutan at sana ganun din kahalaga sayo ‘yon. At sana ang lahat ng first na ‘yon na naranasan ko ay sya ring last na mararamdaman ko😅.
+                          
+            Salamat sa pag stay saken hanggang sa ngayon and tinetreasure ko lahat yun. Malayo pa ang lalakbayin ng pagsasama natin, madami pa tayong mararanasan, madaming pagbabago pa ang magaganap, maraming maraming kwento pa ang mapagkwekwentuhan na mostly, ay mangyayari ng di tayo magkasama. MALAYO PA, PERO MALAYO NA. 4 years lang yan love ha, sana sa 4 years na yan ay syang 80 years na maging tayo. 😔
+            Ilang months naren simula nung naging tayo. Masyadong marami na tayong napagkwentuhan. Marami na ring tawanan ang ipinadama natin sa isat-isa. Maraming away na rin ang na ayos natin. At sana sa mga susunod na taon ay hindi magbago ang lahat ng iyon. Sana, ganun parin. Sana masaya parin. 🥺🥺
+            
+            Sa totoo lang, hindi ako karapat-dapat sayo. Ikaw yung tipo ng babae na parte lang ng pangarap ko, yung dapat ko lang maangkin kapag nagawa ko na lahat. Pero wala namang masama na habang inaabot ko ang mga pangarap ko ay kasama kita, diba?🙂 At sana habang wala pa kong maipagyayabang sa iyo ay ito lang sana panghawakan mo. Na mula ngayon hanggang sa dulo… IKAW LANG ANG GUSTO KONG MAKASAMA. 
+            Kaya sana, habang inaayos ko pa yung sarili ko, na sana kapag naabot ko na yung pinangarap ko, na sana hanggang maging pede na, ay SANA PEDE PA.🥺
+            
+            Anyways, maraming salamat sa pagpaparanas sa aking ng ganito. Im really happy na magiging masaya ako sa Valentines Day. Alam ko namang mag ye-yes ka dahil no choice ka.  Kahit makasama lang kita bukas ay sobrang magiging masaya na ako. Sana di ka magsawa sakin dahil..
+            
+            Tandaan mo na 
+            Ikaw Lang ang aking Wakas -
+            
+            Dahil Music Lover ako, may music akong idi dedicate sayo. 
+            
+        </p>
+
+        <div id="music-container">
+            <img id="song-image" src="pic.jpg" alt="Song Cover">
+            <audio id="audio-player" controls>
+                <source src="understand.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div class="btn" style="display: none;" id="btn" onclick="playMusic()">
+            <button id="play">Play Now</button>
+        </div>
+
+       
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const textElement = document.getElementById("typewriter-text");
+            const btn = document.getElementById('btn');
+            const play = document.getElementById('play');
+            const text = textElement.innerHTML; // Use innerHTML instead of textContent
+            textElement.innerHTML = ""; // Clear text initially
+            textElement.style.display = "block"; // Show element before animation starts
+
+            let index = 0;
+            function typeWriter() {
+                if (index < text.length) {
+                    if (text[index] === "\n") {
+                        textElement.innerHTML += "<br>"; // Add a new line
+                    }
+                    else {
+                        textElement.innerHTML += text[index];
+                    }
+                    index++;
+                    setTimeout(typeWriter, 5); // Adjust speed (lower = faster)
+                }
+            }
+
+            setTimeout(typeWriter, 13000); // Delay before typing starts
+            setTimeout(() =>{
+                btn.style.display = 'block';
+            }, 30000);
+        });
+
+        // Overlay loader function
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader-overlay').style.display = 'none';
+                document.getElementById('container').style.display = 'block';
+            }, 10000);
+        };
+
+        // Play Music
+        function playMusic() {
+            let musicContainer = document.getElementById("music-container");
+            let audioPlayer = document.getElementById("audio-player");
+
+            play.textContent = "I LOVE YOU SO MUCH ERIKA❤️❤️";
+            play.style.width = '350px';
+            musicContainer.style.display = "block";  // Show the music player
+            audioPlayer.play();  // Autoplay the music
+        }
+
+        setTimeout(() => {
+        let hiddenElement = document.querySelector('.hidden');
+        hiddenElement.style.opacity = "1"; // Make it visible
+        hiddenElement.style.animation = "fadeIn 20s ease-in-out forwards"; // Manually trigger animation
+        }, 10000);
+
+    </script>
+</body>
+</html>

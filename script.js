@@ -1,51 +1,79 @@
-let yesBtn = document.getElementById('yesBtn');
-let noBtn = document.getElementById('noBtn');
-let textElement = document.getElementById('text');
+// Get button and text elements
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const textElement = document.getElementById('text');
+const noTextElement = document.getElementById('noText');
 const party = document.getElementById('party');
-let hText = document.getElementById('h6')
+const h6 = document.getElementById('h6');
 
-// Texts
-let yesTexts = [
-  "Are you a human?👽👾",
-  "Are you my love?🫤🙃",
-  "Are you my Erika?😊😅",
-  "I have a question for you, love🤭",
-  "Do you like cats?🐈",
-  "Do you like dogs?🐕",
-  "Do you like me?🤤😖🫠",
-  "AY, nadulas, sorii😗😘",
-  "Do you love me?🤤😖🫠",
-  "Why you click yes hmm🤭🫤😏",
-  "Since you clicked yes",
-  "Do you want to build a family?🤡😁😂",
-  "Eme lang🤭🤭",
+
+
+// Text Arrays
+const yesTexts = [
+  "Hi Erika❤️❤️",
+   "Siguro naman may idea kana kung ano toh😅", 
+   "HAHAHAHAHAHA", 
+   "Anywayss....", 
+  "......", 
+  "Pano ba toh", 
+  "Ahm ano kase...", 
+  "Diba tayo na", 
+  "May anak naren tau", 
+  "Do you want to build a family ba?🤡😁😂", 
+  "Eme lang🤭🤭", 
   "Kidding aside..",
   "ahm ano kase.....",
-  "Do",
+  "Nakakahiya pero..", 
+  "Do", 
   "You",
-  "Want",
-  "To",
-  "Be",
-  "my",
-  "Valentine?",
-  "Do you want to be my Valentine?❤️",
-
+   "Want",
+   "To", 
+   "Be", 
+  "my", 
+  "Valentine?", 
+  "Do you want to be my Valentine? Erika?❤️"
 ];
-let noTexts = [
-  "Why you clicked no!😡😠",
-  "Pressing no again huhh😭😭",
-  "You pressed no again!!🤨😐",
-  "You SHOULDN'T PRESS NO!!🤐😶‍🌫️",
-  "I guess you dont love me!!😭😖",
-  "Don't you really love me?!!😞😢",
-  "Why you keep pressing no!!!😤😤",
-  "I thought you love me :<🥺🥺",
-  "Okay :<🙃"
-];
+const noTexts = ["Okay :<🙃"];
 
 let currentYesTextIndex = -1;
-let currentNoTextIndex = -1;
-let lastChoice = null;
+
+// Function to update text and handle yes button logic
+function updateYesText() {
+    currentYesTextIndex++;
+    
+    if (currentYesTextIndex < yesTexts.length) {
+        textElement.textContent = yesTexts[currentYesTextIndex];
+    }
+    
+    if (currentYesTextIndex === yesTexts.length - 1) {
+        // Last question: show No button and change Yes button text
+        noBtn.style.display = 'block';
+        yesBtn.textContent = 'Yes';
+    }
+    
+    if (currentYesTextIndex === yesTexts.length) {
+        // Redirect to another page if user clicks Yes on final question
+        window.location.href = "accepted/accepted.html";
+    }
+}
+
+// Function to handle No button logic
+function handleNoClick() {
+    if (currentYesTextIndex === yesTexts.length - 1) {
+        // Terminate the program (close window) on final "No"
+        noTextElement.textContent = noTexts[0];
+        noTextElement.style.display = 'block';
+        window.location.href = "exit.html";
+    }
+}
+
+// Event Listeners for buttons
+yesBtn.addEventListener("click", updateYesText);
+yesBtn.addEventListener("click", function (){
+  h6.style.display = 'none';
+});
+noBtn.addEventListener("click", handleNoClick);
+
 
 // GIFs
 const yesGifs = [
@@ -74,10 +102,9 @@ const noGifs = [
 let currentYesGifIndex = 0;
 let currentNoGifIndex = 0;
 
-
+// GIF 
 function showNextGif(choice) {
   let gifFrame = document.getElementById("gif-frame");
-
   if (choice === "yes") {
     currentYesGifIndex = (currentYesGifIndex + 1) % yesGifs.length;
     gifFrame.src = yesGifs[currentYesGifIndex];
@@ -89,46 +116,11 @@ function showNextGif(choice) {
   gifFrame.style.display = "block";
 }
 
-let minusscale = 1;
-let addscale = 1;
-function changeText(choice) {
-  hText.style.display = 'none';
-  if (choice === "yes") {
-    if (lastChoice !== "yes") {
-      currentYesTextIndex = 0;
-    } else {
-      currentYesTextIndex = (currentYesTextIndex + 1) % yesTexts.length;
-    }
-    textElement.textContent = yesTexts[currentYesTextIndex];
-    lastChoice = "yes";
-    noBtn.style.scale = 1;
-    yesBtn.style.scale = 1;
 
-  } else {
-    currentNoTextIndex = (currentNoTextIndex + 1) % noTexts.length;
-    textElement.textContent = noTexts[currentNoTextIndex];
-    lastChoice = "no";
-    minusscale -= 0.1;
-    addscale += 0.1;
-    noBtn.style.scale = minusscale;
-    yesBtn.style.scale = addscale;
-  }
-}
-
-yesBtn.addEventListener("click", function() {
-  changeText("yes");
-  showNextGif("yes");
-});
-
-noBtn.addEventListener("click", function() {
-  changeText("no");
-  showNextGif("no");
-});
-
-let indexExemptions = [2, 6, 8, 10, 12, 13, 14, 15, 16, 17, 18, 19];
+let showPartyIndex = [-1, 0, 7, 8, 9, 14, 15, 16, 17, 18, 19, 21];
 let timeoutId;
 function showParty(){
-  if(!indexExemptions.includes(currentYesTextIndex)){
+  if(showPartyIndex.includes(currentYesTextIndex)){
     // Show Party Gif
     party.style.display = 'block';
     party.style.opacity = '.1';
@@ -176,12 +168,14 @@ function delay(){
   }, 2500);
 }
 
-//Overlay FUnc
+
+// Overlay loader function
 window.onload = function() {
-  // Wait for all resources to load, then remove the loader
-  setTimeout(() => { // Add a slight delay for smooth transition
-      document.getElementById('loader-overlay').style.display = 'none';
-      document.getElementById('container').style.display = 'block';
-  }, 12000); 
+    setTimeout(() => {
+        document.getElementById('loader-overlay').style.display = 'none';
+        document.getElementById('container').style.display = 'block';
+    }, 10000);
 };
+
+
 
